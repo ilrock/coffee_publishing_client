@@ -39,9 +39,22 @@ export default {
       password: ''
     }
   },
+  computed: {
+    currentUser () {
+      return this.$store.getters['users/currentUser']
+    }
+  },
+  watch: {
+    currentUser (val) {
+      if (val) this.$router.replace('/')
+    }
+  },
   methods: {
     onSubmit () {
-      console.log('Logging in..')
+      this.$store.dispatch('users/login', {
+        email: this.email,
+        password: this.password
+      })
     }
   }
 }

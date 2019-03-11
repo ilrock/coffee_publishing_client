@@ -35,5 +35,11 @@ export const actions = {
 
     this.$cookies.set('token', headers['x-auth-token'])
     commit('setCurrentUser', user)
+  },
+  async login ({ commit }, { email, password }) {
+    const { data: user, headers } = await this.$axios.post('/auth/login', { email, password })
+
+    this.$cookies.set('token', headers['x-auth-token'])
+    commit('setCurrentUser', user)
   }
 }
